@@ -40,12 +40,13 @@ pub fn sqrt(x: f64) -> Result<f64, String> {
 
 pub fn factorial(n: u64) -> Result<u64, String> {
     if n > 20 {
-        Err("阶乘数值过大，超出计算范围".to_string())
-    } else {
-        let mut result = 1;
-        for i in 1..=n {
-            result *= i;
-        }
-        Ok(result)
+        return Err("阶乘数值过大，超出计算范围".to_string());
     }
+    
+    let mut result: u64 = 1;
+    for i in 1..=n {
+        result = result.checked_mul(i)
+            .ok_or("阶乘计算溢出".to_string())?;
+    }
+    Ok(result)
 }
