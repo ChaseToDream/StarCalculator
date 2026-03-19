@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "starcalculator",
+  "productName": "星辰计算器",
   "version": "0.1.0",
   "identifier": "com.starcalculator.app",
   "build": {
@@ -12,9 +12,12 @@
   "app": {
     "windows": [
       {
-        "title": "starcalculator",
-        "width": 800,
-        "height": 600
+        "title": "星辰计算器 StarCalculator",
+        "width": 420,
+        "height": 680,
+        "minWidth": 360,
+        "minHeight": 560,
+        "resizable": true
       }
     ],
     "security": {
