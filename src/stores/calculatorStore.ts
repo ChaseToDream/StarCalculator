@@ -12,11 +12,13 @@ export const useCalculatorStore = defineStore('calculator', () => {
   };
 
   const initTheme = () => {
+    document.documentElement.classList.toggle('light', theme.value === 'light');
     document.documentElement.classList.toggle('dark', theme.value === 'dark');
   };
 
   const toggleTheme = () => {
     theme.value = theme.value === 'dark' ? 'light' : 'dark';
+    document.documentElement.classList.toggle('light', theme.value === 'light');
     document.documentElement.classList.toggle('dark', theme.value === 'dark');
   };
 
