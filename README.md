@@ -83,7 +83,7 @@ npm run build
 
 ## 📁 项目结构
 
-```
+```text
 StarCalculator/
 ├── src/                          # 前端源代码
 │   ├── components/               # UI组件
