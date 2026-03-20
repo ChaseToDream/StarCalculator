@@ -277,6 +277,7 @@ const formatResult = (num: number): string => {
 
     <div class="calculator-form">
       <div class="formula">
+        <span class="formula-icon">📝</span>
         {{ currentCalculator.formula }}
       </div>
 
@@ -297,7 +298,7 @@ const formatResult = (num: number): string => {
       </div>
 
       <div v-if="result" class="result-display">
-        <div class="result-label">结果</div>
+        <div class="result-label">计算结果</div>
         <div class="result-value">{{ result }}</div>
       </div>
 
@@ -312,150 +313,180 @@ const formatResult = (num: number): string => {
 .engineering-module {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .category-selector {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 12px;
 }
 
 .category-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 12px 8px;
+  gap: 6px;
+  padding: 16px 12px;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background: var(--bg-secondary);
   color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 13px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid transparent;
 }
 
 .category-btn:hover {
-  background: var(--bg-hover);
+  background: var(--bg-tertiary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .category-btn.active {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
 }
 
 .category-btn .icon {
-  font-size: 20px;
+  font-size: 26px;
+  line-height: 1;
 }
 
 .calculator-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 10px;
 }
 
 .calculator-item {
-  padding: 8px 14px;
+  padding: 10px 16px;
   border: 2px solid var(--border-color);
-  border-radius: 20px;
-  background: var(--bg-primary);
+  border-radius: 24px;
+  background: var(--bg-secondary);
   color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   font-size: 14px;
+  font-weight: 500;
 }
 
 .calculator-item:hover {
   border-color: var(--primary-color);
+  background: var(--bg-tertiary);
+  transform: translateY(-1px);
 }
 
 .calculator-item.active {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   border-color: var(--primary-color);
   color: white;
+  box-shadow: var(--shadow-md);
 }
 
 .calculator-form {
   background: var(--bg-secondary);
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .formula {
   text-align: center;
-  padding: 12px 16px;
-  background: var(--bg-primary);
-  border-radius: 10px;
+  padding: 14px 18px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
   font-size: 14px;
   color: var(--text-secondary);
-  margin-bottom: 16px;
-  font-family: monospace;
+  margin-bottom: 20px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.formula-icon {
+  font-size: 18px;
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
 .input-field {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .input-field label {
   font-size: 14px;
   color: var(--text-secondary);
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .input-field input {
   width: 100%;
-  padding: 12px 16px;
+  padding: 14px 18px;
   border: 2px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   font-size: 16px;
-  background: var(--bg-primary);
+  font-weight: 500;
+  background: var(--bg-tertiary);
   color: var(--text-primary);
-  transition: border-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .input-field input:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .result-display {
   text-align: center;
-  padding: 20px;
-  background: var(--primary-color);
-  border-radius: 12px;
+  padding: 24px;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+  border-radius: var(--radius-lg);
   color: white;
+  box-shadow: var(--shadow-lg);
 }
 
 .result-label {
   font-size: 14px;
   opacity: 0.9;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 600;
 }
 
 .result-value {
-  font-size: 28px;
-  font-weight: bold;
+  font-size: 32px;
+  font-weight: 700;
   word-break: break-all;
+  letter-spacing: -0.5px;
 }
 
 .error-message {
-  margin-top: 12px;
-  padding: 12px 16px;
-  background: rgba(239, 68, 68, 0.1);
+  margin-top: 16px;
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.1));
   border: 1px solid var(--danger-color);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   color: var(--danger-color);
   font-size: 14px;
+  font-weight: 500;
   text-align: center;
+  box-shadow: var(--shadow-sm);
 }
 </style>

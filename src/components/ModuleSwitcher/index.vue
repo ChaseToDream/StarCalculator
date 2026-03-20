@@ -28,11 +28,12 @@ const modules: { type: ModuleType; label: string; icon: string }[] = [
 <style scoped>
 .module-switcher {
   display: flex;
-  gap: 8px;
-  padding: 12px;
+  gap: 10px;
+  padding: 14px;
   background: var(--bg-secondary);
-  border-radius: 12px;
-  margin-bottom: 16px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .module-btn {
@@ -40,32 +41,38 @@ const modules: { type: ModuleType; label: string; icon: string }[] = [
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 12px 8px;
+  gap: 6px;
+  padding: 14px 10px;
   border: none;
-  border-radius: 8px;
+  border-radius: var(--radius-lg);
   background: transparent;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.2s;
-  font-size: 14px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .module-btn:hover {
-  background: var(--bg-hover);
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  transform: translateY(-2px);
 }
 
 .module-btn.active {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
+  box-shadow: var(--shadow-md);
 }
 
 .module-btn .icon {
-  font-size: 24px;
+  font-size: 26px;
   line-height: 1;
+  font-weight: 600;
 }
 
 .module-btn .label {
   font-size: 12px;
+  font-weight: 600;
 }
 </style>

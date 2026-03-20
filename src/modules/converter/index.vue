@@ -164,7 +164,7 @@ watch([fromValue, fromUnit, toUnit, currentCategory], () => {
       </div>
 
       <button class="swap-btn" @click="swapUnits" title="交换单位">
-        ⇅
+        <span class="swap-icon">⇅</span>
       </button>
 
       <div class="input-section">
@@ -194,101 +194,117 @@ watch([fromValue, fromUnit, toUnit, currentCategory], () => {
 .converter-module {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
 }
 
 .category-selector {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 12px;
 }
 
 .category-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 4px;
-  padding: 16px 8px;
+  gap: 6px;
+  padding: 18px 12px;
   border: none;
-  border-radius: 12px;
+  border-radius: var(--radius-lg);
   background: var(--bg-secondary);
   color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   font-size: 14px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid transparent;
 }
 
 .category-btn:hover {
-  background: var(--bg-hover);
+  background: var(--bg-tertiary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .category-btn.active {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
+  border-color: var(--primary-light);
+  box-shadow: var(--shadow-md);
 }
 
 .category-btn .icon {
-  font-size: 24px;
+  font-size: 28px;
+  line-height: 1;
 }
 
 .converter-card {
   background: var(--bg-secondary);
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: var(--radius-xl);
+  padding: 24px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
   position: relative;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .input-section {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .input-label {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
-  font-weight: 500;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .input-value {
   width: 100%;
-  padding: 14px 16px;
+  padding: 16px 18px;
   border: 2px solid var(--border-color);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   font-size: 20px;
-  background: var(--bg-primary);
+  font-weight: 600;
+  background: var(--bg-tertiary);
   color: var(--text-primary);
-  transition: border-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .input-value:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .input-value.result {
-  background: var(--bg-hover);
-  font-weight: 600;
+  background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-hover));
+  font-weight: 700;
+  color: var(--primary-light);
 }
 
 .unit-select {
   width: 100%;
-  padding: 12px 16px;
+  padding: 14px 16px;
   border: 2px solid var(--border-color);
-  border-radius: 10px;
-  font-size: 16px;
-  background: var(--bg-primary);
+  border-radius: var(--radius-md);
+  font-size: 15px;
+  font-weight: 500;
+  background: var(--bg-tertiary);
   color: var(--text-primary);
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: all 0.3s ease;
 }
 
 .unit-select:focus {
   outline: none;
   border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
 }
 
 .swap-btn {
@@ -296,37 +312,45 @@ watch([fromValue, fromUnit, toUnit, currentCategory], () => {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  width: 44px;
-  height: 44px;
+  width: 48px;
+  height: 48px;
   border: none;
   border-radius: 50%;
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s;
-  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: var(--shadow-lg);
+  z-index: 10;
 }
 
 .swap-btn:hover {
-  transform: translate(-50%, -50%) scale(1.1);
-  background: var(--primary-hover);
+  transform: translate(-50%, -50%) scale(1.1) rotate(180deg);
+  box-shadow: var(--shadow-xl);
 }
 
 .swap-btn:active {
   transform: translate(-50%, -50%) scale(0.95);
 }
 
+.swap-icon {
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
 .error-message {
-  padding: 12px 16px;
-  background: rgba(239, 68, 68, 0.1);
+  padding: 14px 18px;
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(239, 68, 68, 0.1));
   border: 1px solid var(--danger-color);
-  border-radius: 10px;
+  border-radius: var(--radius-md);
   color: var(--danger-color);
   font-size: 14px;
+  font-weight: 500;
   text-align: center;
+  box-shadow: var(--shadow-sm);
 }
 </style>

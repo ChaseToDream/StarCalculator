@@ -7,8 +7,14 @@ const store = useCalculatorStore();
 <template>
   <div class="history-panel" v-if="store.history.length > 0">
     <div class="history-header">
-      <h3>📜 计算历史</h3>
-      <button class="clear-btn" @click="store.clearHistory">清除</button>
+      <h3>
+        <span class="header-icon">📜</span>
+        计算历史
+      </h3>
+      <button class="clear-btn" @click="store.clearHistory">
+        <span class="clear-icon">🗑️</span>
+        清除
+      </button>
     </div>
     <div class="history-list">
       <div v-for="item in store.history" :key="item.id" class="history-item">
@@ -21,65 +27,95 @@ const store = useCalculatorStore();
 
 <style scoped>
 .history-panel {
-  margin-top: 16px;
   background: var(--bg-secondary);
-  border-radius: 12px;
-  padding: 16px;
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .history-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .history-header h3 {
-  font-size: 16px;
+  font-size: 15px;
   color: var(--text-primary);
   margin: 0;
-}
-
-.clear-btn {
-  padding: 6px 12px;
-  border: none;
-  border-radius: 6px;
-  background: var(--danger-color);
-  color: white;
-  font-size: 12px;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.clear-btn:hover {
-  opacity: 0.8;
-}
-
-.history-list {
-  max-height: 200px;
-  overflow-y: auto;
+  font-weight: 700;
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 8px;
 }
 
+.header-icon {
+  font-size: 18px;
+}
+
+.clear-btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--danger-color), #dc2626);
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.clear-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.clear-btn:active {
+  transform: translateY(0);
+}
+
+.clear-icon {
+  font-size: 14px;
+}
+
+.history-list {
+  max-height: 180px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .history-item {
-  background: var(--bg-primary);
-  padding: 10px 12px;
-  border-radius: 8px;
+  background: var(--bg-tertiary);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
   border-left: 3px solid var(--primary-color);
+  transition: all 0.2s ease;
+}
+
+.history-item:hover {
+  background: var(--bg-hover);
+  transform: translateX(4px);
 }
 
 .history-expression {
-  font-size: 14px;
+  font-size: 13px;
   color: var(--text-secondary);
   margin-bottom: 4px;
+  font-weight: 500;
 }
 
 .history-result {
   font-size: 16px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: 700;
+  color: var(--primary-light);
 }
 
 .history-list::-webkit-scrollbar {
@@ -88,6 +124,7 @@ const store = useCalculatorStore();
 
 .history-list::-webkit-scrollbar-track {
   background: var(--bg-secondary);
+  border-radius: 3px;
 }
 
 .history-list::-webkit-scrollbar-thumb {

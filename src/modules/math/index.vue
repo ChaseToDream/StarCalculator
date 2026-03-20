@@ -162,25 +162,29 @@ const handleButton = async (btn: string) => {
 
 <template>
   <div class="math-module">
-    <div class="display">
-      <div class="expression">{{ expression || '0' }}</div>
-      <div class="result">{{ result }}</div>
+    <div class="display-container">
+      <div class="display">
+        <div class="expression">{{ expression || '0' }}</div>
+        <div class="result">{{ result || '0' }}</div>
+      </div>
     </div>
 
-    <div class="keypad">
-      <div v-for="(row, rowIndex) in buttons" :key="rowIndex" class="keypad-row">
-        <button
-          v-for="btn in row"
-          :key="btn"
-          :class="['key', {
-            'key-function': ['C', '←', '%'].includes(btn),
-            'key-operator': ['+', '-', '×', '÷'].includes(btn),
-            'key-equals': btn === '='
-          }]"
-          @click="handleButton(btn)"
-        >
-          {{ btn }}
-        </button>
+    <div class="keypad-container">
+      <div class="keypad">
+        <div v-for="(row, rowIndex) in buttons" :key="rowIndex" class="keypad-row">
+          <button
+            v-for="btn in row"
+            :key="btn"
+            :class="['key', {
+              'key-function': ['C', '←', '%'].includes(btn),
+              'key-operator': ['+', '-', '×', '÷'].includes(btn),
+              'key-equals': btn === '='
+            }]"
+            @click="handleButton(btn)"
+          >
+            {{ btn }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -190,85 +194,119 @@ const handleButton = async (btn: string) => {
 .math-module {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+}
+
+.display-container {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  padding: 24px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .display {
-  background: var(--bg-secondary);
-  border-radius: 12px;
-  padding: 16px;
   text-align: right;
 }
 
 .expression {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--text-secondary);
-  min-height: 28px;
+  min-height: 26px;
   word-break: break-all;
+  margin-bottom: 8px;
+  font-weight: 500;
 }
 
 .result {
-  font-size: 32px;
-  font-weight: bold;
-  color: var(--text-primary);
-  min-height: 42px;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--primary-light);
+  min-height: 48px;
   word-break: break-all;
+  letter-spacing: -0.5px;
+}
+
+.keypad-container {
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
 }
 
 .keypad {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
 .keypad-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
+  gap: 12px;
 }
 
 .key {
-  height: 60px;
+  height: 64px;
   border: none;
-  border-radius: 12px;
-  font-size: 20px;
-  font-weight: 500;
+  border-radius: var(--radius-lg);
+  font-size: 22px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.15s;
-  background: var(--bg-secondary);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  background: var(--bg-tertiary);
   color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.key::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+  pointer-events: none;
 }
 
 .key:hover {
-  transform: scale(1.03);
-  background: var(--bg-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
 .key:active {
-  transform: scale(0.97);
+  transform: translateY(0);
+  box-shadow: var(--shadow-sm);
 }
 
 .key-function {
   background: var(--bg-hover);
-  color: var(--primary-color);
+  color: var(--primary-light);
+  font-size: 18px;
 }
 
 .key-operator {
-  background: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: white;
+  font-size: 24px;
 }
 
 .key-operator:hover {
-  background: var(--primary-hover);
+  background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
 }
 
 .key-equals {
   grid-column: span 2;
-  background: var(--success-color);
+  background: linear-gradient(135deg, var(--success-color), #16a34a);
   color: white;
+  font-size: 28px;
 }
 
 .key-equals:hover {
-  background: #16a34a;
+  background: linear-gradient(135deg, #16a34a, #15803d);
 }
 </style>
