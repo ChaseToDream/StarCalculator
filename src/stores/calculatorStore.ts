@@ -11,9 +11,13 @@ export const useCalculatorStore = defineStore('calculator', () => {
     currentModule.value = module;
   };
 
+  const initTheme = () => {
+    document.documentElement.classList.toggle('dark', theme.value === 'dark');
+  };
+
   const toggleTheme = () => {
     theme.value = theme.value === 'dark' ? 'light' : 'dark';
-    document.documentElement.classList.toggle('light', theme.value === 'light');
+    document.documentElement.classList.toggle('dark', theme.value === 'dark');
   };
 
   const addHistory = (item: Omit<HistoryItem, 'id' | 'timestamp'>) => {
@@ -36,6 +40,7 @@ export const useCalculatorStore = defineStore('calculator', () => {
     theme,
     history,
     setModule,
+    initTheme,
     toggleTheme,
     addHistory,
     clearHistory,

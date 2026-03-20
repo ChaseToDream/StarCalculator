@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted } from 'vue';
 import { useCalculatorStore } from './stores/calculatorStore';
 import ModuleSwitcher from './components/ModuleSwitcher/index.vue';
 import HistoryPanel from './components/HistoryPanel/index.vue';
@@ -7,6 +8,10 @@ import ConverterModule from './modules/converter/index.vue';
 import EngineeringModule from './modules/engineering/index.vue';
 
 const store = useCalculatorStore();
+
+onMounted(() => {
+  store.initTheme();
+});
 
 const getCurrentModule = () => {
   switch (store.currentModule) {
